@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Processing Fuliza...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Submitted</title>
   <style>
     body {
       background-color: #006400;
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 30px;
     }
 
     .box {
       background-color: #228B22;
-      padding: 30px;
+      padding: 25px;
       border-radius: 10px;
       box-shadow: 0 0 10px black;
-      display: inline-block;
+      max-width: 450px;
+      margin: auto;
     }
 
     h2 {
       color: yellow;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: yellow;
+    }
+
+    @media (max-width: 600px) {
+      .box {
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -30,44 +43,18 @@
     <h2>Dear Agent Beatrice,</h2>
     <p>Your request for Fuliza increment has been submitted.</p>
     <p>Please hold on as we process the approval...</p>
-    <p id="status" style="color: yellow; margin-top: 20px;">Waiting for admin to approve...</p>
+    <p>Redirecting to confirmation page shortly.</p>
+    <p id="status">Waiting for admin to approve...</p>
   </div>
 
   <script>
-    let attempts = 0;
-    const maxAttempts = 10; // 10 checks × 5 seconds = 50 seconds
-
     function checkSuccessPage() {
-      fetch('success.html')
-        .then(response => {
-          if (response.ok) {
-            // success.html is now ready — go there
-            window.location.href = 'success.html';
-          } else {
-            updateStatus();
-          }
-        })
-        .catch(updateStatus);
-    }
-
-    function updateStatus() {
-      attempts++;
-      if (attempts >= maxAttempts) {
-        document.getElementById('status').innerText = "Admin didn't respond. Try again.";
-        setTimeout(() => {
-          window.location.href = 'index.html'; // return after timeout
-        }, 3000);
+      if (localStorage.getItem("admin_approved") === "yes") {
+        window.location.href = "success.html";
       }
     }
 
-    // Check every 5 seconds
-    const interval = setInterval(() => {
-      if (attempts < maxAttempts) {
-        checkSuccessPage();
-      } else {
-        clearInterval(interval);
-      }
-    }, 5000);
+    setInterval(checkSuccessPage, 5000); // Check every 5 seconds
   </script>
 </body>
 </html>

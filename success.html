@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fuliza Success</title>
   <style>
     body {
@@ -9,15 +10,16 @@
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px;
+      padding: 30px;
     }
 
     .message-box {
       background-color: #006400;
-      padding: 30px;
+      padding: 25px;
       border-radius: 10px;
       box-shadow: 0 0 10px #000;
       display: inline-block;
+      max-width: 450px;
     }
 
     h1 {
@@ -28,29 +30,34 @@
       color: white;
       text-decoration: underline;
     }
+
+    @media (max-width: 600px) {
+      .message-box {
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 <body>
   <script>
-    // 🔒 Check admin access
     if (localStorage.getItem("admin_approved") !== "yes") {
       alert("Access denied. Please go through the proper flow.");
       window.location.href = "index.html";
     } else {
-      // ✅ Show dynamic values
       const phone = localStorage.getItem("phone") || "07XXXXXXXX";
       const limit = localStorage.getItem("limit") || "10,000";
+      const fee = localStorage.getItem("fee") || "36";
 
       document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("phone").innerText = phone;
         document.getElementById("limit").innerText = `Ksh ${limit}.00`;
+        document.getElementById("fee").innerText = `Kshs 0–36`; // fixed as you requested
       });
 
-      // 🧹 Clear data after loading
       localStorage.removeItem("admin_approved");
       localStorage.removeItem("phone");
       localStorage.removeItem("limit");
-      localStorage.removeItem("fee"); // Optional cleanup, not used now
+      localStorage.removeItem("fee");
     }
   </script>
 
@@ -59,10 +66,10 @@
     <p>Phone: <strong id="phone"></strong></p>
     <p>You have successfully opted into Fuliza M-PESA.</p>
     <p>
-      Enjoy limit of <strong id="limit"></strong> at an Access fee of <strong>1%</strong><br>
-      and a daily fee of <strong>Kshs 0–36</strong> on outstanding balance.
+      Enjoy limit of <strong id="limit"></strong> at an Access fee of <strong>1%</strong><br />
+      and a daily fee of <strong id="fee"></strong> on outstanding balance.
     </p>
-    <br>
+    <br />
     <p><a href="index.html">Go back</a></p>
   </div>
 </body>

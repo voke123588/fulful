@@ -1,79 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel – Fuliza Approval</title>
   <style>
     body {
       background-color: #222;
       color: white;
       font-family: Arial, sans-serif;
-      padding: 40px;
+      padding: 20px;
       text-align: center;
     }
 
     .admin-box {
       background-color: #333;
-      padding: 30px;
+      padding: 20px;
       border-radius: 10px;
       display: inline-block;
+      width: 100%;
+      max-width: 400px;
       box-shadow: 0 0 10px #000;
     }
 
     input, button {
       padding: 10px;
-      margin: 10px;
+      margin-top: 15px;
       border-radius: 5px;
-      width: 90%;
+      width: 100%;
+      font-size: 16px;
+      border: none;
     }
 
     button {
       background-color: #28a745;
       color: white;
-      border: none;
+      font-weight: bold;
       cursor: pointer;
     }
 
     button:hover {
       background-color: #218838;
     }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="admin-box">
     <h2>Admin Panel: Fuliza Approval</h2>
-    
-    <input type="text" id="phone" placeholder="Enter Customer Phone Number"><br>
-    <input type="text" id="limit" placeholder="Enter Approved Limit (e.g. 10000)"><br>
-    <input type="text" id="fee" placeholder="Enter Daily Fee (e.g. 36)"><br>
-
-    <button onclick="authorizeAndRedirect()">Generate Success Page</button>
+    <input type="text" id="phone" placeholder="Enter Customer Phone Number" />
+    <input type="text" id="limit" placeholder="Enter Approved Limit (e.g. 10000)" />
+    <input type="text" id="fee" placeholder="Enter Daily Fee (e.g. 36)" />
+    <button onclick="generateSuccess()">Generate Success Page</button>
     <p id="status" style="color: yellow;"></p>
   </div>
 
   <script>
-    function authorizeAndRedirect() {
-      const phone = document.getElementById("phone").value;
-      const limit = document.getElementById("limit").value;
-      const fee = document.getElementById("fee").value;
+    function generateSuccess() {
+      const phone = document.getElementById("phone").value.trim();
+      const limit = document.getElementById("limit").value.trim();
+      const fee = document.getElementById("fee").value.trim();
 
       if (!phone || !limit || !fee) {
-        document.getElementById("status").innerText = "Please fill all fields before proceeding.";
+        alert("Please fill all fields");
         return;
       }
 
-      // Store values for success.html to use
+      // Store data in localStorage
       localStorage.setItem("admin_approved", "yes");
       localStorage.setItem("phone", phone);
       localStorage.setItem("limit", limit);
       localStorage.setItem("fee", fee);
 
-      document.getElementById("status").innerText = "Authorization complete. Redirecting...";
-
-      // Redirect to agent.html
-      setTimeout(() => {
-        window.location.href = "agent.html";
-      }, 2000);
+      document.getElementById("status").innerText = "✔ Success page is ready. Go to agent page.";
     }
   </script>
 </body>
