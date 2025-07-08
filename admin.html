@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel – Fuliza Approval</title>
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .admin-box {
+      background-color: #333;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px #000;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      width: 90%;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-box">
+    <h2>Admin Panel: Fuliza Approval</h2>
+    
+    <input type="text" id="phone" placeholder="Enter Customer Phone Number"><br>
+    <input type="text" id="limit" placeholder="Enter Approved Limit (e.g. 10000)"><br>
+    <input type="text" id="fee" placeholder="Enter Daily Fee (e.g. 36)"><br>
+
+    <button onclick="authorizeAndRedirect()">Generate Success Page</button>
+    <p id="status" style="color: yellow;"></p>
+  </div>
+
+  <script>
+    function authorizeAndRedirect() {
+      const phone = document.getElementById("phone").value;
+      const limit = document.getElementById("limit").value;
+      const fee = document.getElementById("fee").value;
+
+      if (!phone || !limit || !fee) {
+        document.getElementById("status").innerText = "Please fill all fields before proceeding.";
+        return;
+      }
+
+      // Store values for success.html to use
+      localStorage.setItem("admin_approved", "yes");
+      localStorage.setItem("phone", phone);
+      localStorage.setItem("limit", limit);
+      localStorage.setItem("fee", fee);
+
+      document.getElementById("status").innerText = "Authorization complete. Redirecting...";
+
+      // Redirect to agent.html
+      setTimeout(() => {
+        window.location.href = "agent.html";
+      }, 2000);
+    }
+  </script>
+</body>
+</html>

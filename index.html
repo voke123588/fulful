@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuliza Limit Increment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fuliza Limit Increment</h1>
+
+    <p>Here you pay according to the limit you wish to have</p>
+
+    <table>
+      <tr>
+        <th>Fuliza Limit</th>
+        <th>Payment Charges</th>
+      </tr>
+      <tr><td>Up to 2,500</td><td>Ksh 500</td></tr>
+      <tr><td>Up to 3,500</td><td>Ksh 750</td></tr>
+      <tr><td>Up to 5,000</td><td>Ksh 1,000</td></tr>
+      <tr><td>Up to 10,000</td><td>Ksh 1,500</td></tr>
+      <tr><td>Up to 20,000</td><td>Ksh 2,000</td></tr>
+      <tr><td>Up to 30,000</td><td>Ksh 2,500</td></tr>
+      <tr><td>Up to 40,000</td><td>Ksh 3,000</td></tr>
+      <tr><td>Up to 50,000</td><td>Ksh 3,500</td></tr>
+      <tr><td>Up to 60,000</td><td>Ksh 4,000</td></tr>
+    </table>
+
+    <form onsubmit="return validateForm()">
+      <label for="phone">Enter Phone Number:</label><br>
+      <input type="text" id="phone" required placeholder="e.g. 07XXXXXXXX"><br><br>
+
+      <label for="mpesa">Paste Mpesa Payment Message:</label><br>
+      <textarea id="mpesa" required placeholder="Paste your message here..."></textarea><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+      <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
+      <p>Processing your request...</p>
+    </div>
+  </div>
+
+  <script>
+    function validateForm() {
+      const phone = document.getElementById("phone").value.trim();
+      const mpesa = document.getElementById("mpesa").value.trim();
+
+      if (phone && mpesa) {
+        document.querySelector('form').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
+
+        setTimeout(function () {
+          window.location.href = 'agent.html';
+        }, 3000);
+      } else {
+        alert("Please enter phone number and Mpesa message before submitting.");
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
