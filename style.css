@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #006400;
+  color: white;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: yellow;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea, button {
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: yellow;
+  color: #006400;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: gold;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+  }
+
+  input, textarea, button {
+    font-size: 14px;
+  }
+}

